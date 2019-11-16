@@ -13,7 +13,7 @@ RUN cd /usr \
 	&& unzip 3.4.1.zip \
 	&& rm 3.4.1.zip \
 	&& cd /usr/src/app/opencv-3.4.1/modules/python/src2/ \
-	&& rm cv2.cpp
+	&& rm cv2.cpp \
 	&& wget https://github.com/Roadsong/CSML/blob/master/opencv/cv2.cpp \
 	&& cd /usr/src/app/opencv-3.4.1/ \
 	&& mkdir build \
