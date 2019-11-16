@@ -9,6 +9,6 @@ RUN wget https://github.com/clab/dynet/archive/2.1.zip \
 	&& mkdir build \
 	&& cd build \
 	&& cmake .. -DEIGEN3_INCLUDE_DIR=/eigen -DENABLE_CPP_EXAMPLES=ON \
-	&& make -$(nproc) && make install
+	&& make -j$(nproc) && make install
 
 WORKDIR /dynet-2.1/build/examples
