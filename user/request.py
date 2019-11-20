@@ -6,8 +6,8 @@ import socket
 # Pi: client
 
 MANAGEMENT_PORT = 9983
-MANAGEMENT_ADDR = "csml-management-server" # For local testing, maybe we can have a real test with an ubuntu?
-apps = ("opencv", "dynet", "dlib")
+MANAGEMENT_ADDR = "csml-management" # For local testing, maybe we can have a real test with an ubuntu?
+apps = {"opencv":9980, "dynet":9981, "dlib":9982}
 
 class ClientRequest():
     def __init__(self, app, container_id, simple_request = True, result_file = None, upload_file = None, operation = None):
