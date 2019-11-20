@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+        opencv:
+                image: roadsong/opencv-alpine:latest
+                container_name: csml-opencv
+                hostname: csml-opencv-local
+                ports:
+                        - 9980:9980/udp
+                volumes:
+                command: 
+                restart: unless-stopped
+                tty: true
+        dynet:
+                image: roadsong/dynet-alpine:latest
+                container_name: csml-dynet
+                hostname: cmsl-dynet-local
+                ports:
+                        - 9981:9981/udp
+                volumes:
+                command:
+                restart: unless-stopped
+                tty: true
+        dlib:
+                image: roadsong/dlib-alpine:latest
+                container_name: csml-dlib
+                hostname: csml-dlib-local
+                ports:
+                        - 9982:9982/udp
+                volumes:
+                command:
+                restart: unless-stopped
+                tty: true
+        server:
+                image: roadsong/csml-server:latest
+                container_name: csml-server
+                hostname: csml-server-local
+                ports:
+                        - 9983:9983/udp
+                volumes:
+                command:
+                restart: unless-stopped
+                tty: true
+networks:
+        default:
+                external:
+                        name: csml-cluster
