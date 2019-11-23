@@ -1,6 +1,6 @@
 FROM alpine:3.10
 
-RUN apk update && apk add --no-cache alpine-sdk cmake make
+RUN apk update && apk add --no-cache alpine-sdk cmake make moreutils
 
 RUN wget http://dlib.net/files/dlib-19.18.tar.bz2 \
 	&& tar -xvf dlib-19.18.tar.bz2 \
@@ -10,6 +10,10 @@ RUN wget http://dlib.net/files/dlib-19.18.tar.bz2 \
 	&& mkdir build \
 	&& cd build \
 	&& cmake .. \
-	&& cmake --build . --config Release
+	&& cmake --build . --config Release \
+	&& cd / \
+	&& mkdir results \
+	&& cd /results \
+	&& mkdir dlib
 
 WORKDIR /dlib-19.18/examples/build

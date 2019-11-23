@@ -7,7 +7,8 @@ services:
                 ports:
                         - 9980:9980/udp
                 volumes:
-                command: 
+                        - csml-results:/results/opencv
+                command: ["python3", "opencv_app.py"]
                 restart: unless-stopped
                 tty: true
         dynet:
@@ -17,7 +18,8 @@ services:
                 ports:
                         - 9981:9981/udp
                 volumes:
-                command:
+                        - csml-results:/results/dynet
+                command: ["sh", "dynet_app.py"]
                 restart: unless-stopped
                 tty: true
         dlib:
@@ -27,7 +29,8 @@ services:
                 ports:
                         - 9982:9982/udp
                 volumes:
-                command:
+                        - csml-results:/results/dlib
+                command: ["sh", "dlib_app.py"]
                 restart: unless-stopped
                 tty: true
         management:
@@ -37,7 +40,8 @@ services:
                 ports:
                         - 9983:9983/udp
                 volumes:
-                command:
+                        - csml-results:/results
+                command: ["python3", "main.py"]
                 restart: unless-stopped
                 tty: true
 networks:

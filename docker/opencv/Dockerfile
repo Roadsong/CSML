@@ -3,7 +3,7 @@ FROM alpine:3.10
 RUN apk update \
 	&& apk add --no-cache gtk+2.0 gtk+2.0-dev pkgconfig python python-dev py-numpy \ 
 	py-numpy-dev py2-numpy py-numpy-f2py py2-numpy-f2py ffmpeg ffmpeg-libs \
-	ffmpeg-dev zip make cmake gcc g++ vim
+	ffmpeg-dev zip make cmake gcc g++ vim moreutils
 RUN cd /usr \
 	&& mkdir src \
 	&& cd src \
@@ -29,7 +29,11 @@ RUN cd /usr \
 	&& cd /usr/src/app/ \
 	&& wget https://github.com/opencv/opencv_extra/archive/3.4.1.zip \
 	&& unzip 3.4.1.zip \
-	&& rm 3.4.1.zip
+	&& rm 3.4.1.zip \
+	&& cd / \
+	&& mkdir results \
+	&& cd /results \
+	&& mkdir opencv
 	
 
 ENV OPENCV_BUILD_DIR /usr/src/app/opencv-3.4.1/build
