@@ -1,5 +1,3 @@
-# Usage: python3 opencv_app.py
-
 import os
 import sys
 import socket
@@ -12,7 +10,7 @@ def main():
     # (simplest) CMD_LINE Format
     # app:container_id:simple_request
     while True:
-        
+
         CMD_LINE, SOURCE_ADDR = serverSock.recvfrom(1024)
         container_id = CMD_LINE.split(":")[1] # type:str
         simple_request = CMD_LINE.split(":")[2] # type:bool
