@@ -7,8 +7,10 @@ services:
                 ports:
                         - 9980:9980/udp
                 volumes:
-                        - csml-results:/results/opencv
-                command: ["python3", "opencv_app.py"]
+                        - type: volume
+                          source: csml-opencv-results
+                          target: /results/opencv
+                #command: ["python3", "opencv_app.py"]
                 restart: unless-stopped
                 tty: true
         dynet:
@@ -18,8 +20,10 @@ services:
                 ports:
                         - 9981:9981/udp
                 volumes:
-                        - csml-results:/results/dynet
-                command: ["sh", "dynet_app.py"]
+                        - type: volume
+                          source: csml-dynet-results
+                          target: /results/dynet
+                #command: ["python3", "dynet_app.py"]
                 restart: unless-stopped
                 tty: true
         dlib:
@@ -29,21 +33,39 @@ services:
                 ports:
                         - 9982:9982/udp
                 volumes:
-                        - csml-results:/results/dlib
-                command: ["sh", "dlib_app.py"]
+                        - type: volume
+                          source: csml-dlib-results
+                          target: /results/dlib
+                #command: ["python3", "dlib_app.py"]
                 restart: unless-stopped
                 tty: true
         management:
-                image: roadsong/csml-management:latest
+                #image: roadsong/csml-management:latest
+                image: alpine:latest
                 container_name: csml-management
                 hostname: csml-management
                 ports:
                         - 9983:9983/udp
                 volumes:
-                        - csml-results:/results
-                command: ["python3", "main.py"]
+                        - type: volume
+                          source: csml-dlib-results
+                          target: /results/dlib
+                        - type: volume
+                          source: csml-dynet-results
+                          target: /results/dynet
+                        - type: volume
+                          source: csml-opencv-results
+                          target: /results/opencv
+                #command: ["python3", "main.py"]
                 restart: unless-stopped
                 tty: true
+volumes:
+        csml-dlib-results:
+                external: true
+        csml-dynet-results:
+                external: true
+        csml-opencv-results:
+                external: true
 networks:
         default:
                 external:
