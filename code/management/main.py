@@ -1,6 +1,7 @@
 import os
-import sys
 import socket
+import sys
+
 import request_queue
 from config import *
 
