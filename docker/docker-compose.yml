@@ -10,11 +10,10 @@ services:
                         - type: volume
                           source: csml-opencv-results
                           target: /results/opencv
-                #command: ["python3", "/app_code/opencv_app.py"]
                 command: 
-                        - mkdir /app_code
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/opencv_app.py
+                        ["mkdir", "/app_code", 
+                                "&&", "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py", 
+                                "&&", "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/opencv_app.py"]
                 restart: unless-stopped
                 tty: true
         dynet:
@@ -28,9 +27,9 @@ services:
                           source: csml-dynet-results
                           target: /results/dynet
                 command:
-                        - mkdir /app_code
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dynet_app.py
+                        [ "mkdir", "/app_code",
+                                "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py",
+                                "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dynet_app.py"]
                 restart: unless-stopped
                 tty: true
         dlib:
@@ -44,9 +43,9 @@ services:
                           source: csml-dlib-results
                           target: /results/dlib
                 command:
-                        - mkdir /app_code
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py
-                        - wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dlib_app.py
+                        ["mkdir", "/app_code",
+                                "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/config.py",
+                                "wget", "-P", "/app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dlib_app.py"]
                 restart: unless-stopped
                 tty: true
         management:
@@ -67,9 +66,9 @@ services:
                           source: csml-opencv-results
                           target: /results/opencv
                 command:
-                        - mkdir /management_code
-                        - wget -P /management_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/management/config.py
-                        - wget -P /management_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/management/main.py
+                        ["mkdir", "/management_code",
+                                "wget", "-P", "/management_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/management/config.py",
+                                "wget", "-P", "/management_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/management/main.py"]
                 restart: unless-stopped
                 tty: true
 volumes:
