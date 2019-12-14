@@ -37,7 +37,7 @@ def send_request(app, CMD_LINE):
 # Send back useful information to user
 def send_info(info, SOURCE_ADDR):
     clientSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    clientSock.sendto(info, SOURCE_ADDR)
+    clientSock.sendto(info.encode(), SOURCE_ADDR)
     clientSock.close()
 
 
@@ -96,7 +96,7 @@ def main():
                     info = "Dlib queue full now."
 
             # I should use TCP instead of UDP... sad
-            send_info(info.encode(), (SOURCE_ADDR[0], 8899))
+            send_info(info, (SOURCE_ADDR[0], 8899))
 
         # Running silently can avoid lots of work :)
         # If any of a app is vacant and there is a request in queue

@@ -1,6 +1,6 @@
 FROM alpine:3.10
 
-RUN apk update && apk add --no-cache alpine-sdk cmake make mercurial vim moreutils
+RUN apk update && apk add --no-cache alpine-sdk cmake make mercurial vim moreutils python3
 RUN wget https://github.com/clab/dynet/archive/2.1.zip \
 	&& hg clone https://bitbucket.org/eigen/eigen/ -r b2e267d \
 	&& unzip 2.1.zip \

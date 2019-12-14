@@ -2,7 +2,7 @@ FROM alpine:3.10
 
 RUN apk update \
 	&& apk add --no-cache gtk+2.0 gtk+2.0-dev pkgconfig python python-dev py-numpy \ 
-	py-numpy-dev py2-numpy py-numpy-f2py py2-numpy-f2py ffmpeg ffmpeg-libs \
+	py-numpy-dev py2-numpy py-numpy-f2py py2-numpy-f2py ffmpeg ffmpeg-libs python3 \
 	ffmpeg-dev zip make cmake gcc g++ vim moreutils
 RUN cd /usr \
 	&& mkdir src \
