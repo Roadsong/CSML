@@ -43,8 +43,7 @@ services:
                 restart: unless-stopped
                 tty: true
         management:
-                #image: roadsong/csml-management:latest
-                image: alpine:latest
+                image: roadsong/csml-management:latest
                 container_name: csml-management
                 hostname: csml-management
                 ports:
