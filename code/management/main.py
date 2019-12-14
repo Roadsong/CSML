@@ -12,6 +12,9 @@ serverSock.bind((MANAGEMENT_ADDR, MANAGEMENT_PORT))
 # Check the target app is vacant or not
 # How to check? Cannot use cpu indicator because resources are shared!
 def is_vacant(app):
+
+    return True
+
     # grep [pending] in filename would be fine
     EXE_LINE = "ls /results/opencv/ | grep [pending] > /tmp/" + str(app) + "grep_results"
     os.system(EXE_LINE)
@@ -46,7 +49,7 @@ def main():
     dynet_q = request_queue.ClientRequestQueue("dynet", 100)
     print("Initiate DyNet Queue.")
     print(dynet_q.maxsize)
-    
+
     dlib_q = request_queue.ClientRequestQueue("dlib", 100)
     print("Initiate Dlib Queue.")
     print(dlib_q.maxsize)
@@ -57,15 +60,21 @@ def main():
         SOURCE_ADDR = ""
 
         serverSock.setblocking(0) # Non-blocking
-        CMD_LINE, SOURCE_ADDR = serverSock.recvfrom(1024)
-        
+        try:
+            CMD_LINE, SOURCE_ADDR = serverSock.recvfrom(1024)
+        except socket.error as e:
+            continue
+
         if CMD_LINE and SOURCE_ADDR: # Received a new request
-            
+
             print("Received a request.")
-            
+
+            print(SOURCE_ADDR)
+
             # (simplest) Format
             # app:container_id:simple_request
-            app = CMD_LINE.split(":")[0] # type:str
+            CMD_LINE = CMD_LINE.decode("utf-8")
+            app = CMD_LINE.split(":")[0]
 
             if app == "opencv":
                 if cv_q.qsize() < cv_q.maxsize:
@@ -86,7 +95,8 @@ def main():
                 else:
                     info = "Dlib queue full now."
 
-            send_info(info, SOURCE_ADDR)
+            # I should use TCP instead of UDP... sad
+            send_info(info.encode(), (SOURCE_ADDR[0], 8899))
 
         # Running silently can avoid lots of work :)
         # If any of a app is vacant and there is a request in queue
@@ -96,10 +106,11 @@ def main():
             CMD_LINE = dynet_q.get()
         if is_vacant("dlib") and not dlib_q.empty():
             CMD_LINE = dlib_q.get()
-        
-        # Just do it 
+
+        # Just do it
         if CMD_LINE:
-            send_request(app, CMD_LINE)
+            print("ready to send the request :)")
+            #send_request(app, CMD_LINE)
 
 
 if __name__ == "__main__":
