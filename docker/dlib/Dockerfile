@@ -15,6 +15,7 @@ RUN wget http://dlib.net/files/dlib-19.18.tar.bz2 \
 	&& mkdir results \
 	&& cd /results \
 	&& mkdir dlib \
+	&& mkdir /app_code \
 	&& wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dlib_start.sh
 
 WORKDIR /dlib-19.18/examples/build

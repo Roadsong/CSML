@@ -34,6 +34,7 @@ RUN cd /usr \
 	&& mkdir results \
 	&& cd /results \
 	&& mkdir opencv \
+	&& mkdir /app_code \
 	&& wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/opencv_start.sh	
 
 ENV OPENCV_BUILD_DIR /usr/src/app/opencv-3.4.1/build

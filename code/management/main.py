@@ -110,7 +110,7 @@ def main():
         # Just do it
         if CMD_LINE:
             print("ready to send the request :)")
-            #send_request(app, CMD_LINE)
+            send_request(app, CMD_LINE)
 
 
 if __name__ == "__main__":
