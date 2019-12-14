@@ -13,6 +13,7 @@ RUN wget https://github.com/clab/dynet/archive/2.1.zip \
 	&& cd / \
 	&& mkdir results \
 	&& cd /results \
-	&& mkdir dynet
+	&& mkdir dynet \
+	&& wget -P /app_code https://raw.githubusercontent.com/Roadsong/CSML/master/code/app/dynet_start.sh
 
 WORKDIR /dynet-2.1/build/examples
